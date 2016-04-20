@@ -1,0 +1,75 @@
+https://speakerdeck.com/sdeleuze/a-lite-rx-api-for-the-jvm
+
+Reactive: not for speed but scalability and stability
+Perfect fit for Microservices to avoid blocking requests. Flux in input and output. Match http2 spirit of bidirectionnal stream processing.
+
+Indeed: reactive layer addition will slow the app for a few clients
+
+But for many clients: we do not block request
+-> avoid to reach tomcat limit for instance while tomcat is just doing nothing but waiting
+
+
+Read: Reactive Manifesto
+
+Reactive programming: moving imperative logic to async, non-blocking, functional-style code, in particular when interacting with external resources
+
+Doing a REST request or accessing a DB is slow and impact your app => do it async
+
+We need tools: Reactive Streams (contract) & API
+
+Reactive Streams: 4 interfaces (will be in java 9): Publisher & Suscriber & Subscription & Processor
+=> we need impl: Reactor 2.5 is one + RxJava 2.x + Akka Stream 2.x
+=> previous versions do not follow Reactive Streams contract
+
+Suscriber: request to a DB
+Publisher: send data to the subscriber
+
+Backpressure: the publisher keeps data until the subscriber is ready
+
+For instance: subscriber can only handle 3 data from DB, so the publisher will keep other data in DB until the subscriber can handle it
+Another example: mobile client on slow network can not handle all data at once
+
+Reactive Streams github give rules to follow for impl with a TCK (test to check impl)
+
+request(5) but publisher only have 3: push-pull mechanism: publisher will give 3 at once, and the next 2 when it is available.
+Benchmark:
+http://akarnokd.blogspot.fr/2016/03/operator-fusion-part-1.html
+
+Side note on open source projects: not only one dev lead: RxJava 1 lead left for facebook and now it is a mess on the project for RxJava 2, and so netflix does not support it as previously
+
+Reactor 2.5: Reactive Stream contract, will be used by Spring 5
+
+Reactor web console: real time web ui to display reactor internal state: useful to debug
+
+Java 8 stream api: perfect to handle data which are available in memory (array of int, etc), it is optimal. It is for synchronous operations. We can use it in a callback, but not for async and possibly long operation.
+
+CompletableFuture: ok to handle long async op but will provide a finite number of results: do not handle back pressure or infinite data stream.
+
+=> use Mono from Reactor
+
+Read: http://spring.io/blog/2016/04/19/understanding-reactive-types
+
+
+Reactive Spring:
+
+A back office pour peu d'utilisteurs n'a pas besoin de Reactive !
+Mais dÃs que l'on a des IO et des requÃtes lentes, c'est utile.
+BUT: when data are not here and available with latency -> reactive streams
+
+Spring projects are going reactive. Most impoact on Web and Data support (IO intensive)
+
+Databases: NOSQL drivers will come soon, but for SQL DB & JPA/JDBC, it will take longer & the transaction issue needs to be solved. However it could be interesting to accumulate data before updating the DB with Reactive.
+
+Memory consumption: lower with reactive design since we handle data one by one, we do not wait for all data. But the cpu usage is higher.
+
+
+With the use of microservices, it is really significant to avoid blocking requests
+=> reactive Spring
+And we will use the reactive http client with Mono instead of RestTemplate. Or with Flux to receive a stream from the microservice
+
+
+
+https://github.com/reactor/lite-rx-api-hands-on
+
+
+Do not finish with a blocking get at the end...
