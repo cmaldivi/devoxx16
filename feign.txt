@@ -2,6 +2,8 @@ Feign, the java REST client
 
 Android: feign-okhttp / feign-httpclient
 
+Retrofit is a good competitor!
+
 écrire des clients REST en java
 
 https://github.com/Netflix/feign
