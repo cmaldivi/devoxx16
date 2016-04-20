@@ -1,0 +1,4 @@
+Demo de deux services avec dropwizard et feign, histrix au milieu pour la résilience.
+Intéressant, creuser le github.
+
+https://github.com/adejanovski/Devoxx2016
