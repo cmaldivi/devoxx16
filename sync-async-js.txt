@@ -1,1 +1,70 @@
 http://slidedeck.io/jgrenat/devoxx-async-sync-slides
+
+callback hell (beacoup de parenthÃ¨ses fermantes...) + gestion erreur un peu partout...
+
+Avec les Promises:
+
+myAsyncCall()
+ .then(dat => display(dat))
+ .catch(err => showErr(err))
+
+=> plus propre
+
+
+On peut enchainer les promesses:
+
+.then(userID => getUserAsync(userId))
+.then(user => console.log(user))
+.catch(error => console.log(error));
+
+Les erreurs sont propagÃes jusqu'au catch.
+
+Promise.all pour atendre que toutes les promesses fournies sont finies.
+
+Promise.all(promises).
+then(endCallback)
+.catch()
+
+En enchainant les promesses, on peut ne gérer les erreurs qu'à  un seul endroit
+
+
+On peut aller plus loin avec ES6 et les générateurs
+
+function *myGeneraror() {
+  const user = yield getUserAsync();
+  console.log(user);
+}
+
+const it = myGenerator();
+const promise = it.next().value;
+promise.then();
+
+On peut utiliser les coroutines, import de co
+
+// plus besoin du then
+co(function*() {
+  try {
+    const userData = yield asyncCall();
+    const userInfos = yield asyncCall2();
+    return doSomethingWith(userData, userInfos);
+  } catch(err) {
+  
+  }
+)
+
+
+// avec await
+(async function*() {
+  try {
+    const userData = await asyncCall();
+    const userInfos = await asyncCall2();
+    return doSomethingWith(userData, userInfos);
+  } catch(err) {
+  
+  }
+)
+
+await pas encore dans la spec ES6
+
+
+
