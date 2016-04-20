@@ -1,0 +1,59 @@
+Feign, the java REST client
+
+Android: feign-okhttp / feign-httpclient
+
+écrire des clients REST en java
+
+https://github.com/Netflix/feign
+
+Java 7 et 8 friendly
+
+No dependencies* (log, utils, etc), mais il faut ajouter encoder/decoder Json, etc.
+
+Consommer du json côté client n'est pas nouveau, le but est de le faire le plus simplement possible.
+
+interface CatClient {
+  @RequestLine("GET /cats")
+  List<Cat> findAll();
+  
+  @RequestLine("GET /cats/{id}")
+  Cat findById(@Param("id") String id);
+  
+  @RequestLine("POST /cats")
+  Cat create(Cat cat);
+  
+  @RequestLine("DELETE /cats/{id}")
+  @Headers("Role: PuppetMaster") // on pourrait mettre le header au niveau de l'interface
+  Cat delete(@Param("id") String id);
+}
+
+
+CatClient client = Feign
+.builder()
+.decoder(new GsonDecoder())
+.encoder(new GsonEncoder())
+.requestInterceptor(template ->
+  template.header("Date", now)
+ )
+ .errorDecoder(Main::decodeError)
+.target(CatClient.class, "http://localhost:8080/cats");
+
+client.findAll().forEach(System.out::println);
+
+
+private static Exceptin decodeError(String method, Response response) {
+  switch(response.status)
+    case 404: return new NosSuchElementException();
+    ...
+    
+
+
+
+Rendre le code async:
+
+CompletableFuture<List<Cat>> all = CompletableFuture.supplyAsync(() -> {
+  return client.findAll(); // ou à la place du lambda: client::findAll
+}
+all.thenAccept(list -> list.forEach(System.out::println));
+
+
