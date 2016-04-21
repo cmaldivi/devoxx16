@@ -1,0 +1,48 @@
+Slides ?
+
+Regarder le framework fork/join
+http://zeroturnaround.com/rebellabs/java-parallel-streams-are-bad-for-your-health/
+
+Test de perf: outil JMH
+
+Optional
+- intéressant pour éviter la définition d'une valeur représentant l'absence de valeur.
+- pas sérialisable
+- éviter dans les getters ou dans les paramètres : signature moins propre => surcharger les méthodes avec une méthode sans le para optionnel
+- éviter dans un scope local, préférer null car dans un scope local c'est moins génant
+
+Toujours utiliser les fabriques : of, ofEmpty
+Pour les valeurs primitives: OptionalInt, ...
+
+
+Parallel arrays
+Utilise le framework fork/Join (java 7)
+
+rnd = Random();
+Arrays.setAll(i -> rnd.nextInt(100))
+devient:
+Arrays.parallelSetAll(i -> rnd.nextInt(100))
+
+=> beaucoup plus lent en // car la méthode random est synchronized...
+
+avec rnd = ThreadLocalRandom();
+c'est mieux.
+
+Moralité: mesuré !!!
+
+Utilisé les lambdas plutôt que les classes anonymes internes, là où c'est possible : une seule fonction dans l'interface fonctionnelle.
+Anoter nos interfaces fonctionnelles avec @FunctionalInterface
+Utiliser les références de méthodes
+Préférer l'appel d'une méthode plutôt qu'un bloc de code
+
+Exception checkées: difficiles à intégrer dans les lambdas
+
+
+Stream: opération interméiaires qui renvoient un stream ou opération terminale
+Attention à l'ordre des opérations intermédiaires : filtrer avant de trier par ex
+Bien pour les collections, moins pour les maps
+Difficile à débuguer => utiliser peek(System.out::println) ou peek(e -> e) + point d'arrêt
+
+Utiliser les classes dédiées: IntStream par exemple, plus performant !
+
+
