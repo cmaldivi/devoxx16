@@ -1,0 +1,24 @@
+gitlab internal not to rely on an external third party (github)
+google docs, hangout, stackoverflow chat
+m$ stack (IIS, visual studio, c#, asp net/mvc, Myscrosoft SQL server), works since the beginning, no reason to change it.
+
+~15 dev around the globe
+
+Twitter watch to see when something goes wrong
+
+9 web servers and that is all.
+
+Optimized SQL
+Caching
+Dapper & Jil optimized libraries, open source
+
+Key to all: measure everything, you can not optimize something you do not measure.
+
+Cloud is more expensive than internal hosting
+You do not know the ping delay and latency.
+=> not acceptable
+
+Slides: http://odedcoster.com/Devoxx.fr-2016/#/
+
+http://nickcraver.com/blog/2016/03/29/stack-overflow-the-hardware-2016-edition/
+
