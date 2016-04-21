@@ -1,0 +1,45 @@
+Vlad Mihalcea
+
+https://vladmihalcea.com/tutorials/hibernate
+
+https://www.appdynamics.com/database/
+More than half of application performance bottlenecks originate in the database, but most application teams have little or no visibility into database performance.
+
+Connection Provider: Datasource Proxy, for log & metrics features
+Connection aquired lazily: the shorter we ahve the transaction the higher the transcation throughput
+Connection release mode : not perfect to release the connection after each statement, prefer after transaction
+
+Prefer => hibernate.connection.release.mode = after_transaction
+
+JPA Identifier. By default, hibernate will disable JDBC bath inserts.
+Hibernate 5 will use the sequence generator by default (for Oracle or PostGre)
+Table generator is not good: row level locking, Identity is better
+
+Relationships: voir picture
+
+JDBC batching
+You have to design from start to use batching
+hibernate.jdbc.batch_size = 10, 10 is quite a good number in general
+
+hibernate.order_inserts = true
+hibernate.order_updates = true
+=> to optimize cascading
+
+Limit the number of returned results in query: 
+
+HSQL limit
+entityManager.createQuery("").setFirstResult(pageStart).setMaxResults(pageSize).getResultList();
+=> limit the nb of columns
+
+Apply also to the nb of columns!
+=> use request with "SELECT only_one_column"
+=> using projection will help us loading only what we need
+
+=> DTO projections, Read-only views
+
+
+You can turn a Lazy into an Eager, but not an Eager into a Lazy
+
+
+Use the second level cache provided by hibernate
+
