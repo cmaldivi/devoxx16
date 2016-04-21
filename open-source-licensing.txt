@@ -1,0 +1,75 @@
+Richard Fontana, Redhat
+
+Decline of copyleft
+
+GVPL vs BSD debate
+Last 5 years: GPL is in decline, but we do not have good data to analyse it clearly. How do you compare projects? based on their usage, or size of source code? It is complex when you get into the details.
+
+https://blogs.the451group.com/opensource/2011/06/06/the-trend-towards-permissive-licensing/
+
+Careful observers: GPL dominates but shrinking share of pie
+
+"Decline" vs failure to extend influence beyond base OS: extend the GPL influence in other software domains.
+
+ - Web apps: free software in web dev focuses on tools/libraries; applications are mostly proprietary
+ - Copyleft advocates "asleep at the wheel"
+ - Role models prefer noncopyleft
+ 
+ Developer backlash against "open core", like MySQL : GPL but enhanced features proprietary
+ Growing political sophistication of companies
+ 
+ 
+ Post open source software
+ 
+ "younger devs today are about POSS - Post open source software. fuck the license and gouvernance, just commit to github"
+James Governor (@monkchips)
+
+=> This is "all rights reserved" proprietary software, you need a license!
+Conterproductive: companies will just rip out your code
+Github was under pressure to force developers to add a license
+=> Implied license
+=> implied right to use the software for dev purpose
+=> but what about a commercial use of the non licensed software?
+
+Pushing back against licensing and the persmission culture
+=> popularity of MIT license, interst in public domain dedication tools. Dev want to share and that is all they do not want to handle license issues
+
+So now when create a project on github, they will incite you to have a look at the "choose a license web site". Github think that it is more a problem of education.
+
+
+
+
+Contributor agreements controversy
+
+Most projects assume that contributors contribute under the same license.
+DCO("Signed-off-by"): means "I have the right to contribute to this project with its license"
+
+Modern phase of dispute begins with rollout of Canonical copyright assignment for Upstart
+
+It is asymetrical, gives too much power to the company compared to the contributor.
+The company can sale the software without your opinion 
+Departure from traditional approach
+Red tape, inhibits community-building
+
+=> collapse of Project Harmony
+
+Copyright assignment supplanted by Apache-style CLAs
+Battleground now mostly framed as DCO vs. CLAs
+Cargo-cult corporate use of CLAs: bad habits
+
+
+Open source license and patents
+
+Now the trend is to have a MIT or BSD license and add a patent grant in a separate file.
+
+
+
+
+
+
+
+
+
+
+
+
