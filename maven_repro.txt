@@ -1,0 +1,52 @@
+Présentation d'Airbus
+
+Repro:
+ - fixer les versions des plugins spécifiées dans le pom
+ - pas de snapshot
+ - utilisation de maven-enforcer-plugin (vérifie les règles précédentes)
+
+ Et pourtant même avec cela le hash est différent si l'on lance le build deux fois de suite.
+ Maven assure la repro du processus de build et l'EQUIVALENCE de l'artefact produit
+ 
+ Or le hash doit être identique pour :
+ - prouvé qu'un binaire est bien issu de la compilation de sources données => qualité logicielle (erreur humaine)
+ - sécurité informatique (corruption intentionnelle)
+ - s'assurer de la cohérence entre paquet source et paquet binaire
+ 
+ => s'insprirer des distrib linux, même pb.
+ => debian: ReproductibleBuilds en 2013
+ 
+ 2007: Discussions sur debian-devel
+ 2011: compilation déterministe de Bitcoin
+ 2013: Affaire Snowden => limiter les backdoors + TorBrowser
+ 
+ Actuellement 88% des paquets debian sont reproductibles. On vise 100% à terme.
+ 
+ Que faire côté java ?
+ 
+ à l'intérieur de l'archive:
+ 
+ MANIFEST.MF non reproductible: 
+  - champ 'Built-by'
+  - peu repro: 'Created-by' et 'Buil-Jdk'
+  
+  => maven-enforcer-plugin peut vérifier les versions de maven et du jdk utilisées
+  
+  pom.properties: le timestamp n'est pas reproductible
+  
+  l'archive: ZIP
+  => headers non repro: last modification date / timestamp divers
+  
+  
+  JAXB: génération des fichiers à partir du XSD non reproductible
+  
+  JAVADOC: non repro à cause des timestamps
+  => il extiste une option "-notimestamp", par contre il reste l'année sur le copyright
+  
+  Groovy: ne génère pas deux fois le même fichier .class => utilisation de timestamp
+  
+  + rien ne garantit que l'ordre d'insertion des fichiers dans l'archive soit déterministe.
+  
+  
+  
+  https://github.com/Zlika/reproducible-build-maven-plugin
