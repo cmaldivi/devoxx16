@@ -1,0 +1,32 @@
+http://slidedeck.io/tdd/devoxx-git-protips
+https://tdd.github.io/parisweb-2015-workshop/#/modules
+http://slidedeck.io/tdd/devoxx-es6-maintenant
+
+https://www.youtube.com/watch?v=uL9uAAzkFmI
+
+Apple bride: ES2015 supporté à 98% par webkit, mais Safari à 53%... pour favoriser les app store
+
+Babel: utilisé massivement par Facebook
+
+ES6: plus facile, moins de pièges, mode strict quasi tout le temps, donc plus fiable, Babel pond du code mieux que le notre, plus performant
+
+Objet/classes: on a mis des mots clés pour que tu n'aies pas peur...
+
+Déstructuration
+
+Rest & Spread
+
+Valeur par défaut si undefined
+
+Template strings
+
+On utilise plus var !, on utilise let et const.
+const pour les vars qui ne bougent pas, let avec scope pour le reste.
+
+Les fonctions fléchées ne redéfinissent rien, donc pas this, contrairement aux fonctions définies avec 'function'
+
+De vrais modules
+
+Promesses en natif (les slides comportent de liens vers de bons tutos)
+
+Async/Await, pris en charge par Babel
