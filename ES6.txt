@@ -30,3 +30,5 @@ De vrais modules
 Promesses en natif (les slides comportent de liens vers de bons tutos)
 
 Async/Await, pris en charge par Babel
+
+Question typescript: l'important c'est de faire soit du ES6 soit du typescript mais de ne surtout pas continuer avec pré ES6
