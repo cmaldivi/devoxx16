@@ -1,0 +1,43 @@
+Lambda
+
+// singleton
+return in -> 2 * in
+// new instance
+return in -> 2 * in + externalParameter
+
+
+Validation Success/Error: pour récuper des Optional avec la raison de l'erreur
+
+abstract class Validation<E, T> {
+
+  private Validation() {} // non instaniable directement
+  
+  public abstract Optional<T> toOptional();
+  public abstract Validation<T, E> swap();
+  
+  static class Success<E, T> extends Validation<E, T> {
+
+    private final T value;
+
+    public Success(T value) {
+      this.value = value;
+    }
+    
+    @Override
+    public Optional<T> toOptional() {
+      return OPtional.of(value);
+    }
+    
+    
+  }
+  
+  .... avec Failure
+  
+  
+}
+
+=> utile pour limiter le nombre de sous-classes
+=> contraindre par le type, null interdit !
+
+
+
