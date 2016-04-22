@@ -1,1 +1,44 @@
 https://tdd.github.io/devoxx-git-protips/#/
+
+cd -
+=> même chose avec git: git checkout -
+
+Avoir un diff sur les mots:
+--word-diff
+
+Avoir un diff sur les caractères:
+--word-diff-regex=.
+
+Toujours terminer les fichiers par un saut de ligne pour éviter que git affiche toujours la dernière ligne en diff
+
+Diff avec les espaces :
+--ignore-space-at-eol
+--ignore-space-change
+--ignore-all-space
+
+diff.renames= utilisation auto de l'option, --find-renames
+
+diff.mnemonicPrefix
+
+alias:
+git config --global alias.st status
+
+git config --global alias glog log 'log --graph --oneline --decorate -- branches --tags -remotes'
+
+
+Pour ne jamais committer un fichier:
+git update-index --assume-unchanged README.md
+
+
+Chercher l'erreur avec bisect
+
+
+git reflog pour retrouver tous les commits après amend ou rebase
+
+
+Filtrer les logs: 
+--grep 'regex'
+-G 'regex': filtrer sur le diff 
+
+
+

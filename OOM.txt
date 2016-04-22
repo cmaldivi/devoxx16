@@ -1,0 +1,76 @@
+http://jpbempel.blogspot.com
+@jpbempel
+
+Tools: JMH, VisualVM
+
+Monde de la finance : la perf est une feature
+
+un object sans rien prend 8 octets en 32 bits, 16 octets en 64 bits !
+
+=> mark word: hash code, age, marked for gc, lock de synchro
+
+
+CompressedOops pour réduire la taille des objets
+ - peut être utilisé pour augmenter l'espace adressable
+  - alignement mémoire sur 8 octets => 3 derniers bits pas utilisés que l'on pourrait utiliser pour augmenter l'espace d'adressage
+
+Gain avec CompressedOops : 20 à 30 % en mémoire
+
+Activé par défaut sur JVM 64bits: -XX:+UseCompressedOops
+
+
+L'alignement amène le pb du padding pour alignés les champs dans les structures.
+
+Java Oblject Layout (JOL) util fait par Oracle
+java -XX:UseCompressedoops -jar jol-internals.jar java.lang.Object
+
+Le compilateur optimise l'ordre des champs, pas la peine de le faire nous !
+
+
+Taille des structures
+
+Arrays: header 64bits + CompressedOops : 16 octets
+byte[1] size = 17 octets !!!
+
+String: 24 bytes tout nu !: char[] value + int hash
+
+LinkedList: 32 octets, classe Node: 24 octets
+Pour 100 éléments: 32 + 100*24 => 2432 octets ! (surcout sans compter les données utiles)
+
+ArrayList: 440 octets dans le même cas, bien moins couteux en mémoire
+
+HashMap: 4288 octets dans le même cas
+
+
+
+Diagnostique
+
+histogramme des classes
+jmap -histo <pid>
+
+option JVM: -XXPrintClassHistogramBeforeFullGC inclut l'histo de classes dans les logs GC
+-> super pour voir avant le full GC ce qui prend de la place
+
+Ce sont souvent les structures qui prennent de la place
+
+
+Heap dump
+jmap -dump:live,format=b,file=heap.prof <pid>
+
+options: -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=../logs
+
+fourni avec la JVM: visualVM
+
+
+Solutions:
+
+flyweight / internalizers: pour par exemple n'avoir qu'une seule instance pour une même string
+
+HashMap => OpenAddressingHashMap (trove par ex)
+
+
+Measure, don't guess! Jack Shirazi & Kirk Pepperdine
+
+Measure, don't premature! N'adresser que les vrais problèmes.
+
+

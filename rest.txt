@@ -1,0 +1,104 @@
+Guillaume Laforge
+@glaforge Restlet
+
+resources: on préférer les noms aux verbes.
+nouns refer to resources
+resources are handled with http verbs
+
+verbs can be used for actions: /login /logout /repositories/123/tostar / convertTemperature
+
+Prefer plural forms: /tickets/1234 instead of /ticket/1234
+Easier for URL coding: same prefix
+
+Camel case? snake case? dash case?
+
+Prefer lowercase, and snake_case, Underscores seem more common in Camel
+But choose one casing and be consistent
+
+/tickets/124/messages/4 - a ticket could be a group of messages
+/usergroups/234/users/67 - user should have a URL of its own, referenced from the payload
+
+
+Parameters
+
+Path: required, resource identifier
+Query: optional, query collections
+Body: resource specific logic
+Header: global platform specific
+
+
+
+http://bit.ly/stcode
+
+1xx: Hold on...
+2xx: Here you go!
+3xx: Go away!
+4xx: You fucked up :D
+5xx I fucked up :(
+
+Http status dogs, cats
+
+Anti pattern: facebook retourne toujours 200 et erreur dans payload
+
+Creation: 201 created +++ header.location avec l'adresse de la ressource!
+
+
+http://swapi.co/api
+
+
+Accepted: 202 - c'est bon mais on va travailler après (batch)
+
+
+DELETE /tickets/654  => 204 No content
+
+
+Partial content: et dans header.link on donne les url pour prev/next
+
+
+
+Pagination:
+
+With a page number: ?page=23
+can also specify a page size
+pb si insertion en cours
+
+Donc avec un cursor: ?cursor=3434434, le cursor pointe l'endroit courant et on dit next/prev
+
+Provide helpful error payloads
+http problem error standard vnc-error
+
+An unknown status code should be treated as the first one of the family, par exe: 456 => 400
+
+
+Mobile/Desktop clients: adapt payload content based on query parameter:
+
+?fields=firstname, lastname, age, address.zip (sous-champ)
+?exclude:biographt,resume
+?style=compact
+
+
+Pour le tri: ?sort=title+DESC
+
+
+
+Searching: graphql, falcor
+
+
+API versions: in the url /v2/
+
+Hypermedia: more generic client, but heavier payload
+Solutions: HAL, JSON-LD, etc
+
+
+
+Identifiers: prefer UUID over natural order
+
+PATCH verb: pour ne modifier qu'un seul champ plutôt que de faire un gros PUT
+
+Récuperer plusieurs éléments d'un coup: ?ids=2323, é32323, é32323
+Sinon utiliser le POST avec la payload
+
+
+blog octo design REST api
+
+
