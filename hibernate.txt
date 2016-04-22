@@ -1,0 +1,58 @@
+Emmanuel Bernard
+
+Hibernate tu connais... mais en fait tu connais pas
+
+Hibernate 5, nouvelles fonctionnalités
+
+Progrès sur la modularité
+ - permet de démarrer plus vite
+ - on charge ce dont à besoin, lazy loading
+ - sécurité: on expose moins de features
+ 
+JPA: le bootstrap est défini, on ne s'en occupe pas.
+
+Java 8: nouveaux types Date et Time
+Java 5 6 7 amélioration
+
+Si on utilise Date java 8: ajouter la dépendance hibernate-java8
+Resource hibernate autoclosable (pas besoin de faire resource.close() dans un catch/finally), on fait juste le try
+
+
+Plugin maven config amélioré
+
+Chargé les propriétés en lazy
+@Basic(fetch=FetchType.LAZY)
+@LasyGroup("assets")
+
+=> on charge toutes le propriétés d'un même groupe à la fois
+
+Plus besoin sur double associations de faire la mise à jour des deux côtés.(mappyedBy?)
+
+Pour des objets qui ne changent jamais (objet de référence, immuable), ni de ref vers des objets qui changent:
+
+hibernate.cache.use_reference_entrie = true
+
+
+Gros boulot sur la doc avec des exemples
+
+Blog: http://in.relation.to
+
+
+
+Hibernate search: indexation full text avec Lucene
+
+Hibernate OGM: JPA for NoSql: MongoDB, etc
+
+Hibernate Validator (Bean Validation JEE): 
+annotations java 8: 
+
+public Class User {
+  @Valid
+  public List<@MyNotNull @Email String> emails;
+}
+
+
+Hibernate [Search] Spatial:
+ - hibernate search utilise Lucene
+ - spatial utilise les fonctions spatiales du RDBMS (Mysql, etc)
+
