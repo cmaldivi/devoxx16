@@ -1,0 +1,37 @@
+relire le code avec un expert du domain (pas un dev): il doit comprendre !
+pas de technique (SQL Excpetion par exemple): extrait ailleurs
+
+Vaule type: lié au domaine: Amount ou Price et pas int !
+
+Constructeur transactionnel: FAIL FAST, pas de setter
+
+On nomme les fonctions et les types en fonction de la terminologie du domaine
+
+Egalité forte et unicicté forte: tous les attributs sont importants: prix & devise considérés en même temps
+
+It is developpers understanding , not your knowledge which will be in the software
+
+Solution du DDD: 1 seul langage, celui des utilisateurs, des experts du domaine, mais parfois comment savoir qui est l'expert du domaine ?
+Parfois on a des contextes différents
+
+Par exemple pour la vente le client c'est sa catégorie socio professionnelle, pour la compta c'est ses moyens de paiements, etc
+
+Sur un portail web, on retrouve des contextes différents: mise en avant, catalogue, etc.
+
+Modéliseme: modéliser pour modéliser avec tout ce que l'on a en tête
+=> partir des vrais usages !!! donc modèle incrémentale
+
+L'architecture hexagonale
+dedans: le métier
+entre: barbelés : injection de dépendances, interface
+dehors: la technique
+
+=> deux zones et des interfaces, que deux couches: domain et l'espace technique (database, framework, etc)
+
+
+Legacy... on refait tout ou pas
+
+=> on repart avec une bulle DDD à l'intérieur
+
+
+
